@@ -9,6 +9,9 @@
       {% for exemplarlivro in exemplarlivro_list %}
       <li class="{% if exemplarlivro.esta_atrasado %}text-danger{% endif %}">
         <a href="{% url 'livro-detalhes' exemplarlivro.livro.pk %}">{{exemplarlivro.livro.titulo}}</a> ({{ exemplarlivro.data_devolucao }})
+        {% if perms.catalogo.pode_renovar_emprestimo %}
+            <a href="{% url 'renovar-livro' exemplarlivro.id %}"> - Renovar</a>  
+        {% endif %}
       </li>
       {% endfor %}
     </ul>
